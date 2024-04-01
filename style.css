@@ -40,6 +40,10 @@ div:focus {
     box-shadow: 0 19px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px black;
 }
 
+input {
+    width: 100%;
+}
+
 img {
     width: 650px;
 }

@@ -32,15 +32,15 @@ window.google.ac = {};
 window.google.ac.h = function(rawResponse) {
     let parsedResponse = parseYouTubeAPIResponse(rawResponse)
 
+    let interfaceElement = document.getElementById('interface');
     let suggestionsElement = document.getElementById('suggestions');
-    let parentElement = suggestionsElement.parentElement;
-    suggestionsElement.remove();
+
+    if(suggestionsElement !== null) suggestionsElement.remove();
+    if(parsedResponse.query === '') return;
+
     suggestionsElement = document.createElement('ol');
     suggestionsElement.id = 'suggestions';
-
-    parentElement.appendChild(suggestionsElement);
-
-    if(parsedResponse.query === '') return;
+    interfaceElement.appendChild(suggestionsElement);
 
     parsedResponse.suggestions.forEach(suggestion => {
         let itemElement = document.createElement('li');
