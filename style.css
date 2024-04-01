@@ -7,6 +7,7 @@
     outline: none;
     background: none;
     color: inherit;
+    list-style-type: none;
 }
 
 html, body {
@@ -26,7 +27,7 @@ body {
     align-items: center;
 }
 
-input {
+div {
     width: 550px;
     background-color: #2b2b2b;
     border: 1px solid #5a5a5a;
@@ -35,7 +36,7 @@ input {
     box-shadow: 0 14px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px black;
 }
 
-input:focus {
+div:focus {
     box-shadow: 0 19px 24px rgba(0, 0, 0, 0.3), 0 0 0 1px black;
 }
 
