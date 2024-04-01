@@ -1,4 +1,4 @@
-const suggestionCount = 6;
+const maxSuggestionCount = 6;
 let currentSelectedSuggestion = -1;
 
 let searchbarElement = document.getElementById('searchbar');
@@ -13,29 +13,32 @@ searchbarElement.addEventListener('input', event => {
     youtubeScriptElement.id = 'youtubeScript';
 
     parentElement.appendChild(youtubeScriptElement);
+
+    currentSelectedSuggestion = -1;
 });
 
 searchbarElement.addEventListener('keydown', event => {
     let suggestionsElement = document.getElementById('suggestions');
+    let itemElements = Array.from(suggestionsElement.children);
 
     if(event.key === 'Enter') {
         if(currentSelectedSuggestion === -1) {
             window.location.href = searchResultsURLForQuery(searchbarElement.value);
         } else {
-            let selectedSuggestionElement = Array.from(suggestionsElement.children)[currentSelectedSuggestion];
-            window.location.href = searchResultsURLForQuery(selectedSuggestionElement.textContent);
+            let selectedItemElement = itemElements[currentSelectedSuggestion];
+            window.location.href = searchResultsURLForQuery(selectedItemElement.textContent);
         }
     } else if(event.key === 'ArrowUp') {
         event.preventDefault();
         currentSelectedSuggestion--;
         if(currentSelectedSuggestion <= -2) {
-            currentSelectedSuggestion = suggestionCount - 1;
+            currentSelectedSuggestion = itemElements.length - 1;
         }
         updateItemElementClasses(suggestionsElement);
     } else if(event.key === 'ArrowDown') {
         event.preventDefault();
         currentSelectedSuggestion++;
-        if(currentSelectedSuggestion >= suggestionCount) {
+        if(currentSelectedSuggestion >= itemElements.length) {
             currentSelectedSuggestion = -1;
         }
         updateItemElementClasses(suggestionsElement);
@@ -76,7 +79,7 @@ window.google.ac.h = rawResponse => {
 
 let parseYouTubeAPIResponse = response => {
     let [query, suggestionsData] = response;
-    let suggestions = suggestionsData.map(suggestion => suggestion[0]).slice(0, suggestionCount);
+    let suggestions = suggestionsData.map(suggestion => suggestion[0]).slice(0, maxSuggestionCount);
 
     return { query, suggestions };
 };
