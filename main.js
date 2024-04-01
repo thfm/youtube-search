@@ -44,7 +44,10 @@ window.google.ac.h = function(rawResponse) {
 
     parsedResponse.suggestions.forEach(suggestion => {
         let itemElement = document.createElement('li');
-        itemElement.appendChild(document.createTextNode(suggestion));
+        let linkElement = document.createElement('a');
+        linkElement.textContent = suggestion;
+        linkElement.href = searchResultsURLForQuery(suggestion);
+        itemElement.appendChild(linkElement);
         suggestionsElement.appendChild(itemElement);
     });
 }
