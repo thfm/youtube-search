@@ -72,8 +72,10 @@ window.google.ac.h = rawResponse => {
     suggestionsElement.id = 'suggestions';
     interfaceElement.appendChild(suggestionsElement);
 
-    for(let [index, suggestion] of parsedResponse.suggestions.entries()) {
-        suggestionsElement.appendChild(itemElementForSuggestion(suggestion, index));
+    for(let suggestion of parsedResponse.suggestions) {
+        let itemElement = document.createElement('li');
+        itemElement.textContent = suggestion;
+        suggestionsElement.appendChild(itemElement);
     };
 };
 
@@ -82,13 +84,6 @@ let parseYouTubeAPIResponse = response => {
     let suggestions = suggestionsData.map(suggestion => suggestion[0]).slice(0, maxSuggestionCount);
 
     return { query, suggestions };
-};
-
-let itemElementForSuggestion = (suggestion, index) => {
-    let itemElement = document.createElement('li');
-    itemElement.textContent = suggestion;
-
-    return itemElement;
 };
 
 let updateItemElementClasses = suggestionsElement => {
