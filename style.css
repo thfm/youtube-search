@@ -12,7 +12,7 @@
 
 img {
     display: block;
-    width: 650px;
+    width: 400px;
 }
 
 html, body {
@@ -23,11 +23,10 @@ body {
     background-color: #282828;
     color: #dddddd;
     font-family: system-ui;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 250;
     line-height: 1;
-    padding-top: 200px;
-    
+    padding-top: 275px;
 }
 
 body > * {
@@ -45,7 +44,7 @@ div {
     border: 1px solid #5a5a5a;
     border-radius: var(--outer-radius);
     box-shadow: 0 14px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px black;
-    margin-top: 100px;
+    margin-top: 75px;
 }
 
 div:focus {
@@ -54,7 +53,7 @@ div:focus {
 
 input {
     width: 100%;
-    padding: calc(var(--padding) + 10px) calc(var(--padding) + 32px);
+    padding: calc(var(--padding) + 10px) calc(var(--padding) + 16px);
 }
 
 ol {
@@ -64,7 +63,7 @@ ol {
 
 li {
     border-radius: var(--inner-radius);
-    padding: 8px 32px;
+    padding: 8px 16px;
 }
 
 li.selected {
