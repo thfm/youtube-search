@@ -19,6 +19,8 @@ searchbarElement.addEventListener('input', event => {
 
 searchbarElement.addEventListener('keydown', event => {
     let suggestionsElement = document.getElementById('suggestions');
+    if(suggestionsElement === null) return;
+
     let itemElements = Array.from(suggestionsElement.children);
 
     if(event.key === 'Enter') {
@@ -43,8 +45,6 @@ searchbarElement.addEventListener('keydown', event => {
         }
         updateItemElementClasses(suggestionsElement);
     }
-
-    console.log(currentSelectedSuggestion);
 });
 
 let suggestionsURLForQuery = query => {
@@ -60,23 +60,24 @@ let searchResultsURLForQuery = query => {
 window.google = {};
 window.google.ac = {};
 window.google.ac.h = rawResponse => {
-    let parsedResponse = parseYouTubeAPIResponse(rawResponse)
+    let parsedResponse = parseYouTubeAPIResponse(rawResponse);
 
-    let interfaceElement = document.getElementById('interface');
     let suggestionsElement = document.getElementById('suggestions');
-
     if(suggestionsElement !== null) suggestionsElement.remove();
-    if(parsedResponse.query === '') return;
+
+    if(parsedResponse.query === '' || parsedResponse.suggestions.length === 0) return;
 
     suggestionsElement = document.createElement('ol');
     suggestionsElement.id = 'suggestions';
-    interfaceElement.appendChild(suggestionsElement);
 
     for(let suggestion of parsedResponse.suggestions) {
         let itemElement = document.createElement('li');
         itemElement.textContent = suggestion;
         suggestionsElement.appendChild(itemElement);
     };
+
+    let interfaceElement = document.getElementById('interface');
+    interfaceElement.appendChild(suggestionsElement);
 };
 
 let parseYouTubeAPIResponse = response => {
