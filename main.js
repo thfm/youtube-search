@@ -44,6 +44,9 @@ searchbarElement.addEventListener('keydown', event => {
             currentSelectedSuggestion = -1;
         }
         updateItemElementClasses(suggestionsElement);
+    } else if(event.key == 'Escape') {
+        currentSelectedSuggestion = -1;
+        updateItemElementClasses(suggestionsElement);
     }
 });
 
